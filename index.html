@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hampers Studio - Curated Gifts from Hisar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* CSS STYLES START HERE */
+
+        /* 1. Global Styles & Variables */
+        :root {
+            --bg-color-light: #F5F0EC;
+            --bg-color-dark: #EAE0DA;
+            --primary-color: #5C4033;
+            --primary-hover-color: #4A3329;
+            --accent-color: #B8A29A;
+            --text-color: #5C4033;
+            --body-text-color: #706256;
+            --light-text-color: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+            --shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color-light);
+            color: var(--body-text-color);
+            line-height: 1.7;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            font-weight: 300;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-weight: 700;
+        }
+
+        h2 {
+            font-weight: 700;
+        }
+
+        h3 {
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        section {
+            padding: 90px 0;
+            overflow: hidden;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease-out;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover-color);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        /* 2. Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .header.scrolled {
+            background-color: rgba(245, 240, 236, 0.9);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.9rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .header .logo,
+        .header .nav-links a,
+        .header .menu-toggle {
+            color: var(--light-text-color);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: color 0.4s ease;
+        }
+
+        .header.scrolled .logo,
+        .header.scrolled .menu-toggle {
+            color: var(--text-color);
+            text-shadow: none;
+        }
+
+        .header.scrolled .nav-links a {
+            color: var(--body-text-color);
+            text-shadow: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* 3. Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light-text-color);
+            background-image: linear-gradient(to right, rgba(92, 64, 51, 0.6), rgba(92, 64, 51, 0.2)), url('image.png');
+            background-color: var(--primary-color);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--light-text-color);
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: heroTitleFadeIn 1s ease-out forwards 0.5s;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            animation: heroTextFadeIn 1s ease-out forwards 0.8s;
+            font-weight: 300;
+        }
+
+        @keyframes heroTitleFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes heroTextFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* 4. Hampers Section */
+        .hampers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .hamper-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.4s ease-out, box-shadow 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .hamper-card:hover {
+            transform: translateY(-12px) rotateX(3deg) rotateY(3deg);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .hamper-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .hamper-card-content {
+            padding: 30px 25px;
+        }
+
+        .hamper-card-content h3 {
+            font-size: 1.6rem;
+        }
+
+        .hamper-card-content p {
+            margin-bottom: 18px;
+            color: var(--body-text-color);
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* 5. Why Choose Us Section */
+        #features {
+            background-color: var(--bg-color-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-item {
+            background-color: var(--card-bg);
+            padding: 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item .icon-wrapper {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--bg-color-dark);
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+        }
+
+        .feature-item:hover .icon-wrapper {
+            background-color: var(--accent-color);
+        }
+
+        .feature-item:hover .icon {
+            color: var(--light-text-color);
+        }
+
+        .feature-item .icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .feature-item p {
+            font-weight: 300;
+        }
+
+        /* 6. Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            border-left: none;
+        }
+
+        .testimonial-card::before {
+            content: '\f10d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 3rem;
+            color: var(--bg-color-dark);
+            z-index: 1;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1.2rem;
+            color: var(--body-text-color);
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        .testimonial-card cite {
+            font-weight: bold;
+            font-style: normal;
+            color: var(--text-color);
+            display: block;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 7. About, FAQ, Contact, Footer... */
+        #about {
+            background-color: var(--bg-color-light);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.4s ease-out;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            text-align: left;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        #faq {
+            background-color: var(--bg-color-dark);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.25rem;
+            font-weight: 400;
+            font-family: var(--font-body);
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 15px 0;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-color);
+        }
+
+        .faq-question i {
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out, padding 0.6s ease;
+            color: var(--body-text-color);
+            font-weight: 300;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 250px;
+            padding-top: 20px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(45deg);
+        }
+
+        #contact {
+            background-color: var(--bg-color-light);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--body-text-color);
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .social-links a {
+            color: var(--light-text-color);
+            font-size: 1.6rem;
+            margin: 0 18px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-8px) scale(1.15);
+        }
+
+        .footer p {
+            margin-top: 25px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 12. Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 3.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                max-width: 500px;
+            }
+
+            /* Horizontally Scrollable Sections */
+            #features .container,
+            #hampers .container,
+            #testimonials .container {
+                /* Added testimonials */
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .features-grid,
+            .hampers-grid,
+            .testimonials-grid {
+                /* Added testimonials */
+                display: flex;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                gap: 20px;
+                scroll-snap-type: x mandatory;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .features-grid::-webkit-scrollbar,
+            .hampers-grid::-webkit-scrollbar,
+            .testimonials-grid::-webkit-scrollbar {
+                /* Added testimonials */
+                display: none;
+            }
+
+            /* === UPDATED CODE BLOCK STARTS HERE === */
+            /* Dynamic padding to allow first/last items to center */
+            .hampers-grid {
+                padding: 40px calc(50vw - 150px);
+            }
+
+            .features-grid {
+                padding: 40px calc(50vw - 140px);
+            }
+
+            .testimonials-grid {
+                /* Testimonial cards are ~300px wide */
+                padding: 40px calc(50vw - 150px);
+            }
+
+            /* Card alignment and sizing */
+            .hamper-card {
+                flex: 0 0 300px;
+                scroll-snap-align: center;
+            }
+
+            .feature-item {
+                flex: 0 0 280px;
+                scroll-snap-align: center;
+            }
+
+            .testimonial-card {
+                flex: 0 0 300px;
+                scroll-snap-align: center;
+            }
+
+            /* === UPDATED CODE BLOCK ENDS HERE === */
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--bg-color-light);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.5s ease-in-out;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .nav-links.active a {
+                color: var(--body-text-color);
+                text-shadow: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 1001;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-image {
+                max-width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content {
+                padding: 0 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+            }
+
+            /* Adjust card width and padding for small phones */
+            .hamper-card,
+            .testimonial-card {
+                flex-basis: 280px;
+            }
+
+            .hampers-grid,
+            .testimonials-grid {
+                padding: 20px calc(50vw - 140px);
+            }
+
+            .feature-item {
+                flex-basis: 250px;
+            }
+
+            .features-grid {
+                padding: 20px calc(50vw - 125px);
+            }
+        }
+
+        /* 13. Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+    <header class="header">
+        <nav class="navbar container"><a href="#home" class="logo">The Hampers Studio</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#hampers">Hampers</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul><button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <div class="hero-content fade-in visible">
+                <h1>Crafted with Care, Gifted with Love</h1>
+                <p>Discover beautifully curated gift hampers for every occasion, handcrafted with passion in the heart
+                    of Hisar, Haryana.</p><a href="#hampers" class="btn">Explore Our Collection</a>
+            </div>
+        </section>
+        <section id="hampers">
+            <div class="container">
+                <h2 class="fade-in">Our Signature Hampers</h2>
+                <div class="hampers-grid">
+                    <div class="hamper-card fade-in"><img
+                            src="https://www.thespringpalette.com/cdn/shop/files/1_83305a26-701f-4960-b55b-424208131aae.jpg?v=1727581787"
+                            alt="Celebration Hamper">
+                        <div class="hamper-card-content">
+                            <h3>The Celebration Box</h3>
+                            <p>Perfect for birthdays and anniversaries. Packed with gourmet treats and sparkling joy.
+                            </p><span class="price">₹2,499</span>
+                        </div>
+                    </div>
+                    <div class="hamper-card fade-in"><img
+                            src="https://hfnlife.com/cdn/shop/products/1gkgk.jpg?v=1663820546"
+                            alt="Wellness Hamper">
+                        <div class="hamper-card-content">
+                            <h3>The Wellness Retreat</h3>
+                            <p>A soothing collection of aromatic teas, organic skincare, and relaxation essentials.</p>
+                            <span class="price">₹1,999</span>
+                        </div>
+                    </div>
+                    <div class="hamper-card fade-in"><img
+                            src="https://betweenboxes.in/cdn/shop/files/GourmetRoomGiftHamper.jpg?v=1716367179&width=1500"
+                            alt="Gourmet Hamper">
+                        <div class="hamper-card-content">
+                            <h3>The Gourmet Delight</h3>
+                            <p>For the food lover. An exquisite selection of artisanal cheese, crackers, and fine
+                                chocolates.</p><span class="price">₹3,199</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="features">
+            <div class="container">
+                <h2 class="fade-in">Why Choose The Hampers Studio?</h2>
+                <div class="features-grid">
+                    <div class="feature-item fade-in">
+                        <div class="icon-wrapper"><i class="fas fa-star icon"></i></div>
+                        <h3>Premium Quality</h3>
+                        <p>We source only the finest artisanal and local products for our hampers.</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <div class="icon-wrapper"><i class="fas fa-magic icon"></i></div>
+                        <h3>Fully Customizable</h3>
+                        <p>Create a truly personal gift by building your own bespoke hamper with us.</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <div class="icon-wrapper"><i class="fas fa-box-open icon"></i></div>
+                        <h3>Stunning Presentation</h3>
+                        <p>Every hamper is a work of art, beautifully packaged for an unforgettable unboxing.</p>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <div class="icon-wrapper"><i class="fas fa-truck-fast icon"></i></div>
+                        <h3>Local Hisar Delivery</h3>
+                        <p>Fast, reliable, and careful delivery to your doorstep within Hisar and nearby areas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="testimonials">
+            <div class="container">
+                <h2 class="fade-in">What Our Customers Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card fade-in">
+                        <p>"Absolutely stunning hamper! The quality of the products was top-notch and the presentation
+                            was beautiful. My wife loved it!"</p><cite>- Rohan S., Hisar</cite>
+                    </div>
+                    <div class="testimonial-card fade-in">
+                        <p>"The best gifting service in Haryana. I ordered a custom hamper for my parents' anniversary,
+                            and the team was so helpful. Highly recommended!"</p><cite>- Priya G., Gurugram</cite>
+                    </div>
+                    <div class="testimonial-card fade-in">
+                        <p>"The delivery was so quick and the hamper looked even better than the pictures. It's my go-to
+                            place for special occasions now."</p><cite>- Ankit M., Chandigarh</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="container">
+                <div class="about-content fade-in">
+                    <div class="about-image"><img
+                            src="Gemini_Generated_Image_p4mfnbp4mfnbp4mf.png"
+                            alt="Owner crafting a hamper"></div>
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in Hisar, The Hampers Studio was born from a simple idea: to make gifting a truly
+                            special and effortless experience. We believe a gift should tell a story, which is why we
+                            meticulously source the finest local and artisanal products to create hampers that delight
+                            the senses.</p>
+                        <p>Every box is hand-packed with love and attention to detail, ensuring your gesture of kindness
+                            is perfectly expressed. We're proud to bring a touch of luxury and thoughtfulness to our
+                            community in Haryana and beyond.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="faq">
+            <div class="container faq-container">
+                <h2 class="fade-in">Frequently Asked Questions</h2>
+                <div class="faq-item fade-in"><button class="faq-question"><span>Can I create a custom hamper?</span><i
+                            class="fas fa-plus"></i></button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We love helping you create the perfect personalized gift. Please visit our
+                            'Contact' section to get in touch, and we'll guide you through the process.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in"><button class="faq-question"><span>What are your delivery areas?</span><i
+                            class="fas fa-plus"></i></button>
+                    <div class="faq-answer">
+                        <p>We offer same-day delivery within Hisar city. We also deliver across Haryana and to major
+                            metro cities, which may take 2-4 business days. Please contact us for specific location
+                            queries.</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in"><button class="faq-question"><span>What payment methods do you
+                            accept?</span><i class="fas fa-plus"></i></button>
+                    <div class="faq-answer">
+                        <p>We accept all major credit/debit cards, UPI (GPay, PhonePe, Paytm), and net banking for
+                            online orders. Cash on Delivery is available for orders within Hisar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact">
+            <div class="container contact-content fade-in">
+                <h2>Get In Touch</h2>
+                <p>We'd love to help you create the perfect gift. Visit our studio or contact us for custom orders and
+                    inquiries.</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> The Hampers Studio, Model Town, Hisar, Haryana</p>
+                    <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> hello@thehampersstudio.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links"><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#"
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" aria-label="Whatsapp"><i
+                        class="fab fa-whatsapp"></i></a></div>
+            <p>&copy; 2025 The Hampers Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Javascript is unchanged
+        document.addEventListener('DOMContentLoaded', function () { const e = document.getElementById("preloader"), t = document.body; setTimeout(() => { e.style.opacity = "0", setTimeout(() => { e.style.display = "none", t.classList.add("loaded") }, 500) }, 1e3); const o = document.querySelector(".header"); window.addEventListener("scroll", () => { window.scrollY > 50 ? o.classList.add("scrolled") : o.classList.remove("scrolled") }); const s = document.querySelector(".menu-toggle"), a = document.querySelector(".nav-links"); s.addEventListener("click", () => { a.classList.toggle("active") }), document.querySelectorAll(".nav-links a").forEach(e => { e.addEventListener("click", () => { a.classList.remove("active") }) }); const i = document.querySelectorAll(".fade-in"), n = new IntersectionObserver(function (e, t) { e.forEach(e => { e.isIntersecting && (e.target.classList.add("visible"), t.unobserve(e.target)) }) }, { threshold: .1, rootMargin: "0px 0px -50px 0px" }); i.forEach(e => { e.closest("#home") || n.observe(e) }); const l = document.querySelectorAll(".faq-item"); l.forEach(e => { const t = e.querySelector(".faq-question"); t.addEventListener("click", () => { l.forEach(t => { t !== e && t.classList.remove("active") }), e.classList.toggle("active") }) }) });
+    </script>
+</body>
+
+</html> 
